@@ -4,25 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro Timer</title>
+    <link href="https://db.onlinewebfonts.com/c/17241fb9c2ffb3ec11eba762e771435f?family=Suisse+Int%27l+Book" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>POMODORO</h1>
-        <div class="time-buttons">
-            <button class="pomodoro">Pomodoro</button>
-            <button class="short-break">Short Break</button>
-            <button class="long-break">Long Break</button>
-        </div>
-        <time class="timer">25:00</time>
-        <div class="play-pause-reset-buttons">
-            <button class="play">Play</button>
-            <button class="reset">Reset</button>
-        </div>
-        <label for="" class="Tasks">Tasks</label>
-        <input type="text" id="Tasks" name="Tasks">
-        <button class="zen">[ Zen Mode ]</button>
+    <div class="header">
+        <button>Dark Mode</button>
     </div>
+    <div class="flex-container">
+        <div class="container">
+            <h1 class="heading">POMODORO</h1>
+            <div class="time-buttons">
+                <button class="pomodoro">Pomodoro</button>
+                <button class="short-break">Short Break</button>
+                <button class="long-break">Long Break</button>
+            </div>
+            <time class="timer">25:00</time>
+            <div class="play-pause-reset-buttons">
+                <button class="play">Play</button>
+                <button class="reset">Reset</button>
+            </div>
+            <form>
+                <fieldset>
+                  <legend>Tasks</legend>
+                  <input type="text" name="tasks" />
+                  <button type="submit">+</button>
+                </fieldset>
+              </form>
+            <button class="zen">[ Zen Mode ]</button>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

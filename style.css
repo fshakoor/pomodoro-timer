@@ -1,63 +1,95 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+:root {
+    --main-white: #e5e7eb;
 }
 
-html {
-    background-color: #0148C6;
-}
-
-html, body {
+html, body, .flex-container {
     margin: 0;
     height: 100%;
+    overflow: hidden;
 }
 
-body {
+.flex-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "Suisse Int'l Book";
 }
 
 .container {
     display: flex;
     flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+input {
+    border: 0;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    font-weight: 600;
+    background-color: transparent;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+fieldset {
+    padding: 10px 100px;
+    border-radius: 8px;
+    border: 2px solid black;
+}
+
+fieldset legend {
+    padding: 3px 6px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 50px;
+}
+
+.timer, .heading, fieldset legend {
+    font-weight: 1000;
+    margin: 0;
+}
+
+.heading {
+    font-size: 100px;
+}
+
+.timer {
+    font-size: 140px;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.header button {
+    background-color: white;
+    border: 2px black solid;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+}
+
+.header button:hover {
+    background-color: black;
+    color: white;
+}
+
+button {
+    font-family: "Suisse Int'l Book";
+    font-weight: bolder;
+    border-radius: 8px;
+    padding: 10px 20px;
+    /* background-color: white;
+    color: black; */
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.time-buttons {
+    background-color: black;
+    border-radius: 8px;
+    padding: 5px;
 }
