@@ -1,7 +1,56 @@
 :root {
-    --dark-mode: black;
-    --red: #ff7473;
-    --white: #fff;
+    --border-btn: 3px solid white;
+    --color-base-bg: #ff7473;
+    --color-base-text: white;
+    --color-btn-bg: #ff7473;
+    --hover-btn-bg: white;
+    --hover-btn-text: #ff7473;
+
+    --toggle-btn-bg: white;
+    --border-toggle-btn: 3px solid #ff7473;
+    --toggle-btn-text: #ff7473;
+    --toggle-hover-bg: #ff7473;
+    --toggle-hover-text: white;
+
+    --header-footer-bg: white;
+    --color-footer-text: #ff7473;
+}
+
+:root.dark {
+    --border-btn: 3px solid white;
+    --color-base-bg: rgb(18, 18, 18);
+    --color-base-text: white;
+    --color-btn-bg: rgb(18, 18, 18);
+    --hover-btn-bg: white;
+    --hover-btn-text: rgb(18,18,18);
+
+    --toggle-btn-bg: rgb(18, 18, 18);
+    --border-toggle-btn: 3px solid white;
+    --toggle-btn-text: white;
+    --toggle-hover-bg: white;
+    --toggle-hover-text: rgb(18,18,18);
+
+    --header-footer-bg: rgb(18, 18, 18);
+    --color-footer-text: white;
+}
+
+
+:root.light {
+    --border-btn: 3px solid white;
+    --color-base-bg: #ff7473;
+    --color-base-text: white;
+    --color-btn-bg: #ff7473;
+    --hover-btn-bg: white;
+    --hover-btn-text: #ff7473;
+
+    --toggle-btn-bg: white;
+    --border-toggle-btn: 3px solid #ff7473;
+    --toggle-btn-text: #ff7473;
+    --toggle-hover-bg: #ff7473;
+    --toggle-hover-text: white;
+
+    --header-footer-bg: white;
+    --color-footer-text: #ff7473;
 }
 
 html,body {
@@ -11,186 +60,91 @@ html,body {
     overflow: hidden;
 }
 
-.red {
-    background-color: var(--red);
-}
-
-.dark {
-    background-color: var(--dark-mode);
-}
-
-.white {
-    background-color: var(--white);
-}
-
 body {
+    display: grid;
+    grid-template-rows: .5fr 10fr .5fr;
+    background-color: var(--header-footer-bg);
+}
+
+.header {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    flex-shrink: 0;
+    justify-content: flex-end;
+    margin-right: 1vw;
+    background-color: var(--header-footer-bg);
 }
 
 .container {
     display: flex;
-    align-items: center;
     flex-direction: column;
-    /* gap: 10px; */
-    justify-content: space-between;
-    text-align: center;
-    height: max-content;
-    padding: 50px 0;
-    cursor:default;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-base-bg);
+    gap: 1vh;
 }
 
-* {
-box-sizing: border-box;
-}
-
-.pomodoro {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    text-align: center;
+.container > *, .button {
+    color: var(--color-base-text);
+    margin: 0;
 }
 
 .title {
+    font-size: 6rem;
     font-weight: 900;
-    font-size: 5rem;
-    margin: 0;
-    color: var(--white);
-    padding: 0;
+    text-align: center;
 }
 
 .status {
-    padding: 15px 0 0 0;
-    margin: 0;
-    color: var(--white);
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    font-weight: 800;
+    font-size: 1.5rem;
+    font-weight: 600;
     font-style: italic;
 }
 
 .timer {
-    font-size: 7rem;  
+    font-size: 9rem;
     font-weight: 900;
-    color: var(--white);
-    height: min-content;
-    padding: 0 0 20px 0;
 }
 
-.header,.footer {
-    display: flex;
-    padding: 10px 0;
-    margin: 0;
-    width: 100%;
-    font-size: 1.1rem;
-    font-weight: 800;
-}
-
-.header {
-    justify-content: flex-end;
-}
-
-.footer {
-    justify-content: center;
-    padding: 20px;
-    /* border: 2px solid var(--white); */
-    color: var(--red);
-    /* font-weight: bold; */
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
-    cursor: default;
-}
-
-.mode {
-    margin: 0 10px 0 0;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    border: 3px solid var(--red);
-    color: var(--red);
+button {
     cursor: pointer;
-    font-weight: 800;
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
-    min-width: 120px;
-}
-
-.button {
-    font-size: 1.1rem;
-    border: 3px solid var(--white);
-    color: var(--red);
-    cursor: pointer;
-    font-weight: 800;
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
-    min-width: 120px;
-}
-
-.button:hover {
-    color: var(--white);
-    background-color: var(--red);
-    border: 3px solid var(--white);
-}
-
-.mode:hover {
-    color: var(--white);
-    background-color: var(--red);
-    border: 3px solid var(--red);
-}
-
-.button:focus, .mode:focus {
-    outline: none;
-}
-
-.session {
-    border: 10px solid var(--red);
-    background: var(--red);
-    color: var(--white);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .btns {
-    display:flex;
-    flex-direction: row;
-    padding: 0;
-    margin: 0;
-    transform: translateX(-3px);
-}
-
-#switch, #reset, #toggle {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-#switch {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#reset {
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
-#toggle {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.break {
-    border: 10px solid gray;
-    background: gray;
-    color: var(--white);
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    gap: 1vw;
+    min-width: 20vw;
+}
+
+.theme-toggle {
+    background-color: var(--toggle-btn-bg);
+    color: var(--toggle-btn-text);
+    border: var(--border-toggle-btn);
+    border-radius: 8px;
+}
+
+.theme-toggle:hover {
+    background-color: var(--toggle-hover-bg);
+    color: var(--toggle-hover-text);
+}
+
+.button {
+    background-color: var(--color-base-bg);
+    border: var(--border-btn);
+    border-radius: 8px;
+}
+
+.button:hover {
+    background-color: var(--hover-btn-bg);
+    color: var(--hover-btn-text);
+}
+
+.footer {
+    background-color: var(--header-footer-bg);
+    color: var(--color-footer-text);
+    display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 0.8rem;
+    font-weight: 400;
 }
