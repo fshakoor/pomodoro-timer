@@ -14,6 +14,7 @@
 
     --header-footer-bg: white;
     --color-footer-text: #ff7473;
+    --transition-duration: 0.5s;
 }
 
 :root.dark {
@@ -60,9 +61,13 @@ html,body {
     overflow: hidden;
 }
 
+body, .header, .container, .footer {
+    transition: var(--transition-duration);
+}
+
 body {
     display: grid;
-    grid-template-rows: .5fr 10fr .5fr;
+    grid-template-rows: 1fr 10fr 1fr;
     background-color: var(--header-footer-bg);
 }
 
@@ -89,7 +94,7 @@ body {
 }
 
 .title {
-    font-size: 6rem;
+    font-size: 5rem;
     font-weight: 900;
     text-align: center;
 }
@@ -101,12 +106,16 @@ body {
 }
 
 .timer {
-    font-size: 9rem;
+    font-size: 10rem;
     font-weight: 900;
+    transform: translateY(-1.5vh);
 }
 
 button {
     cursor: pointer;
+    padding: 10px 20px;
+    min-width: 10vw;
+    font-weight: bold;
 }
 
 .btns {
@@ -117,7 +126,7 @@ button {
 }
 
 .theme-toggle {
-    background-color: var(--toggle-btn-bg);
+    background-color: transparent;
     color: var(--toggle-btn-text);
     border: var(--border-toggle-btn);
     border-radius: 8px;
