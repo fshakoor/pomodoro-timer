@@ -1,57 +1,40 @@
 :root {
     --border-btn: 3px solid white;
-    --color-base-bg: #ff7473;
-    --color-base-text: white;
-    --color-btn-bg: #ff7473;
-    --hover-btn-bg: white;
-    --hover-btn-text: #ff7473;
-
-    --toggle-btn-bg: white;
+    --white: white;
+    --red: #ff7473;
     --border-toggle-btn: 3px solid #ff7473;
-    --toggle-btn-text: #ff7473;
-    --toggle-hover-bg: #ff7473;
-    --toggle-hover-text: white;
+    --transition-duration: 0.2s;
+    --white-text: white;
+    --red-button-text: #ff7473;
+    --red-text: #ff7473;
 
-    --header-footer-bg: white;
-    --color-footer-text: #ff7473;
-    --transition-duration: 0.5s;
+    --white-header-footer: white;
+    --red-container: #ff7473;
 }
 
 :root.dark {
     --border-btn: 3px solid white;
-    --color-base-bg: rgb(18, 18, 18);
-    --color-base-text: white;
-    --color-btn-bg: rgb(18, 18, 18);
-    --hover-btn-bg: white;
-    --hover-btn-text: rgb(18,18,18);
-
-    --toggle-btn-bg: rgb(18, 18, 18);
-    --border-toggle-btn: 3px solid white;
-    --toggle-btn-text: white;
-    --toggle-hover-bg: white;
-    --toggle-hover-text: rgb(18,18,18);
-
-    --header-footer-bg: rgb(18, 18, 18);
-    --color-footer-text: white;
+    --white: rgb(18,18,18);
+    --red: rgb(18,18,18);
+    --border-toggle-btn: 3px solid #white;
+    --white-text: white;
+    --red-text: white;
+    --red-button-text: rgb(18,18,18);
+    --transition-duration: 0.2s;
+    --white-header-footer: rgb(48,49,54);
+    --red-container: rgb(32,34,37);
 }
 
 
 :root.light {
     --border-btn: 3px solid white;
-    --color-base-bg: #ff7473;
-    --color-base-text: white;
-    --color-btn-bg: #ff7473;
-    --hover-btn-bg: white;
-    --hover-btn-text: #ff7473;
-
-    --toggle-btn-bg: white;
+    --white: white;
+    --red: #ff7473;
     --border-toggle-btn: 3px solid #ff7473;
-    --toggle-btn-text: #ff7473;
-    --toggle-hover-bg: #ff7473;
-    --toggle-hover-text: white;
-
-    --header-footer-bg: white;
-    --color-footer-text: #ff7473;
+    --transition-duration: 0.2s;
+    --white-text: white;
+    --red-button-text: #ff7473;
+    --red-text: #ff7473;
 }
 
 html,body {
@@ -65,10 +48,14 @@ body, .header, .container, .footer {
     transition: var(--transition-duration);
 }
 
+div {
+    cursor:default;
+}
+
 body {
     display: grid;
-    grid-template-rows: 1fr 10fr 1fr;
-    background-color: var(--header-footer-bg);
+    grid-template-rows: 0.7fr 10fr 0.7fr;
+    background-color: var(--white-header-footer);
 }
 
 .header {
@@ -76,7 +63,8 @@ body {
     align-items: center;
     justify-content: flex-end;
     margin-right: 1vw;
-    background-color: var(--header-footer-bg);
+    background-color: var(--white-header-footer);
+    padding: 1vh 0;
 }
 
 .container {
@@ -84,12 +72,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-base-bg);
+    background-color: var(--red-container);
     gap: 1vh;
 }
 
 .container > *, .button {
-    color: var(--color-base-text);
+    color: var(--white-text);
     margin: 0;
 }
 
@@ -100,8 +88,8 @@ body {
 }
 
 .status {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.3rem;
+    font-weight: 800;
     font-style: italic;
 }
 
@@ -109,13 +97,11 @@ body {
     font-size: 10rem;
     font-weight: 900;
     transform: translateY(-1.5vh);
+    height: min-content;
 }
 
 button {
     cursor: pointer;
-    padding: 10px 20px;
-    min-width: 10vw;
-    font-weight: bold;
 }
 
 .btns {
@@ -123,37 +109,55 @@ button {
     justify-content: center;
     gap: 1vw;
     min-width: 20vw;
+    background-color: white;
+    border-radius: 8px;
 }
 
 .theme-toggle {
-    background-color: transparent;
-    color: var(--toggle-btn-text);
-    border: var(--border-toggle-btn);
-    border-radius: 8px;
+    background-color: var(--white-header-footer);
+    color: var(--red-text);
+    border: 0;
+    border-radius: 50px;
+}
+
+.theme-toggle svg {
+    width: 2vw;
+    height: 2vh;
+    padding: 15px 10px;
+    min-width: min-content;
 }
 
 .theme-toggle:hover {
-    background-color: var(--toggle-hover-bg);
-    color: var(--toggle-hover-text);
+    background-color: var(--red-container);
+    color: var(--white-text);
 }
 
 .button {
-    background-color: var(--color-base-bg);
+    background-color: white;
+    color: var(--red-container);
     border: var(--border-btn);
     border-radius: 8px;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    min-width: 10vw;
+    font-weight: 900;
 }
 
 .button:hover {
-    background-color: var(--hover-btn-bg);
-    color: var(--hover-btn-text);
+    background-color: var(--red-container);
+    color: var(--white-text);
 }
 
 .footer {
-    background-color: var(--header-footer-bg);
-    color: var(--color-footer-text);
+    background-color: var(--white-header-footer);
+    color: var(--red-text);
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
-    font-weight: 400;
+    font-weight: 600;
+}
+
+:hover {
+    transition: 0.5s
 }
