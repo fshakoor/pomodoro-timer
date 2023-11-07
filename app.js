@@ -65,7 +65,7 @@ function switchMode() {
 }
 
 function startTimer(display) {
-  clearInterval(timer); // Ensures only one instance of function is running
+  clearInterval(timer);
   timer = setInterval(function() {
     changeDisplay();
     if (time !== 0) {

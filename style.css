@@ -37,14 +37,18 @@
     --red-text: #ff7473;
 }
 
+html, body, button {
+    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
+}
+
 html,body {
     height: 100vh;
     margin: 0;
-    font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji";
     overflow: hidden;
+    font-size: 16px;
 }
 
-body, .header, .container, .footer {
+body, .header, .container {
     transition: var(--transition-duration);
 }
 
@@ -54,25 +58,62 @@ div {
 
 body {
     display: grid;
-    grid-template-rows: 0.7fr 10fr 0.7fr;
-    background-color: var(--white-header-footer);
+    grid-template-rows: 0.7fr 7fr 0.7fr;
+    background-color: var(--red-container);
 }
 
 .header {
     display: flex;
+    justify-content: space-between;
+    background-color: var(--red-container);
     align-items: center;
-    justify-content: flex-end;
-    margin-right: 1vw;
+    width: 100vw
+}
+
+.title {
+    color: var(--white-text);
+    font-weight: 900;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.theme-toggle {
     background-color: var(--white-header-footer);
-    padding: 1vh 0;
+    color: var(--red-text);
+    border: 0;
+    border-radius: 50px;
+    margin-right: 15px;
+}
+
+.theme-toggle svg {
+    width: 2vw;
+    height: 2vh;
+    padding: 10px 10px;
+    min-width: min-content;
+}
+
+.theme-toggle:hover {
+    background-color: var(--red-container);
+    color: var(--white-text);
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     background-color: var(--red-container);
+    width: 100vw;
+}
+
+.sub-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255,255,255,0.25);
+    border-radius: 8px;
+    padding: 3vh 3vw;
     gap: 1vh;
 }
 
@@ -81,23 +122,33 @@ body {
     margin: 0;
 }
 
-.title {
-    font-size: 5rem;
-    font-weight: 900;
-    text-align: center;
+@media (min-width: 0px) {
+    .title { font-size: 1rem; }
+  }
+  @media (min-width: 400px) {
+    .timer { font-size: 1.25rem; }
+  }
+@media (min-width: 1001px){
+    .title { font-size: 1.5rem; }
+}
+
+@media (min-width: 0px) {
+    .timer { font-size: 5rem; }
+  }
+  @media (min-width: 400px) {
+    .timer { font-size: 7rem; }
+  }
+@media (min-width: 1001px){
+    .timer { font-size: 10rem; }
 }
 
 .status {
     font-size: 1.3rem;
-    font-weight: 800;
-    font-style: italic;
+    font-weight: 900;
 }
 
 .timer {
-    font-size: 10rem;
     font-weight: 900;
-    transform: translateY(-1.5vh);
-    height: min-content;
 }
 
 button {
@@ -109,27 +160,6 @@ button {
     justify-content: center;
     gap: 1vw;
     min-width: 20vw;
-    background-color: white;
-    border-radius: 8px;
-}
-
-.theme-toggle {
-    background-color: var(--white-header-footer);
-    color: var(--red-text);
-    border: 0;
-    border-radius: 50px;
-}
-
-.theme-toggle svg {
-    width: 2vw;
-    height: 2vh;
-    padding: 15px 10px;
-    min-width: min-content;
-}
-
-.theme-toggle:hover {
-    background-color: var(--red-container);
-    color: var(--white-text);
 }
 
 .button {
@@ -143,19 +173,10 @@ button {
     font-weight: 900;
 }
 
+
 .button:hover {
     background-color: var(--red-container);
     color: var(--white-text);
-}
-
-.footer {
-    background-color: var(--white-header-footer);
-    color: var(--red-text);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-    font-weight: 600;
 }
 
 :hover {
