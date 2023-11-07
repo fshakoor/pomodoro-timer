@@ -1,26 +1,21 @@
 :root {
     --border-btn: 3px solid white;
-    --white: white;
-    --red: #ff7473;
     --border-toggle-btn: 3px solid #ff7473;
-    --transition-duration: 0.2s;
+    --transition-duration: 0.5s;
     --white-text: white;
     --red-button-text: #ff7473;
     --red-text: #ff7473;
-
     --white-header-footer: white;
     --red-container: #ff7473;
 }
 
 :root.dark {
     --border-btn: 3px solid white;
-    --white: rgb(18,18,18);
-    --red: rgb(18,18,18);
-    --border-toggle-btn: 3px solid #white;
+    --border-toggle-btn: 3px solid white;
     --white-text: white;
     --red-text: white;
     --red-button-text: rgb(18,18,18);
-    --transition-duration: 0.2s;
+    --transition-duration: 0.5s;
     --white-header-footer: rgb(48,49,54);
     --red-container: rgb(32,34,37);
 }
@@ -28,13 +23,24 @@
 
 :root.light {
     --border-btn: 3px solid white;
-    --white: white;
-    --red: #ff7473;
     --border-toggle-btn: 3px solid #ff7473;
-    --transition-duration: 0.2s;
+    --transition-duration: 0.5s;
     --white-text: white;
     --red-button-text: #ff7473;
     --red-text: #ff7473;
+    --white-header-footer: white;
+    --red-container: #ff7473;
+}
+
+:root.break {
+    --border-btn: 3px solid white;
+    --border-toggle-btn: 3px solid #0075C4;
+    --transition-duration: 0.5s;
+    --white-text: white;
+    --red-button-text: #0075C4;
+    --red-text: #0075C4;
+    --white-header-footer: white;
+    --red-container: #0075C4;
 }
 
 html, body, button {
