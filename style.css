@@ -80,7 +80,8 @@ body {
     color: var(--white-text);
     font-weight: 900;
     text-align: center;
-    margin-left: 1vw;
+    margin-top: 1rem;
+    margin-left: 1rem;
 }
 
 .theme-toggle {
@@ -88,7 +89,8 @@ body {
     color: var(--red-text);
     border: 0;
     border-radius: 50px;
-    margin-right: 1vw;
+    margin-right: 1rem;
+    margin-top: 1rem;
 }
 
 .theme-toggle svg {
@@ -109,7 +111,7 @@ body {
     justify-content: center;
     background-color: var(--red-container);
     width: 100vw;
-    gap: 1vw;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -126,7 +128,7 @@ body {
 
 .add_time, .subtract_time {
     display: flex;
-    gap: 0.5vw;
+    gap: 0.5rem;
 }
 
 .container > *, .button {
@@ -136,12 +138,15 @@ body {
 
 @media (min-width: 0px) {
     .title { font-size: 1rem; }
+    .container { flex-direction: column; }
   }
-  @media (min-width: 400px) {
+  @media (min-width: 450px) {
     .timer { font-size: 1.25rem; }
+    .container { flex-direction: row; }
   }
 @media (min-width: 1001px){
     .title { font-size: 1.5rem; }
+    .container { flex-direction: row; }
 }
 
 @media (min-width: 0px) {

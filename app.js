@@ -1,14 +1,3 @@
-// let pomodoroSkin,
-//   displayStatus,
-//   displayTime,
-//   timer,
-//   minutes,
-//   seconds,
-//   timeSession = 25, // work time in minutes
-//   timeBreak = 5,
-//   timeOn = false,
-//   time = 1500; // work time in seconds
-
 let curStatus = 'session';
 let switchBtn = document.querySelector('#switch');
 let tabTitle = document.querySelector('title');
@@ -18,17 +7,11 @@ let sessionTime = 25;
 let breakTime = 5;
 let count = sessionTime*60;
 let curTime = document.querySelector('.timer');
-let timeOn = false;
 let startStopBtn = document.querySelector("#toggle");
-
-// function changeDisplay() {
-//   minutes = parseInt(time / 60, 10);
-//   seconds = parseInt(time % 60, 10);
-//   minutes = minutes < 10 ? "0" + minutes : minutes;
-//   seconds = seconds < 10 ? "0" + seconds : seconds;
-//   displayTime.textContent = minutes + ":" + seconds;
-//   tabTitle.textContent = displayTime.textContent + " - Session";
-// }
+let subFive = document.querySelector("#minus_five");
+let subOne = document.querySelector("#minus_one");
+let addOne = document.querySelector("#plus_one");
+let addFive = document.querySelector("#plus_five");
 
 const toggleIcon = document.querySelector('.toggle-icon')
 document.querySelector('.theme-toggle').onclick = function() {
@@ -68,6 +51,79 @@ function setBreak() {
 
 }
 document.querySelector('#switch').addEventListener('click', setBreak)
+// INCREMENTS
+// if button clicked AND time not running, add/remove time depending on button type
+function minusFive() {
+  if (isTimerRunning === false) {
+  if (curStatus === 'session') {
+    if (sessionTime > 10) {
+      sessionTime -= 5
+      displayCurrentTime(sessionTime*60)
+    }
+  }
+  else if (curStatus === 'break') {
+    if (breakTime > 5) {
+      breakTime -= 5
+      displayCurrentTime(breakTime*60)
+    }
+  }
+}
+}
+subFive.addEventListener('click', minusFive)
+
+function minusOne() {
+  if (isTimerRunning === false) {
+  if (curStatus === 'session') {
+    if (sessionTime > 10) {
+      sessionTime -= 1
+      displayCurrentTime(sessionTime*60)
+    }
+  }
+  else if (curStatus === 'break') {
+    if (breakTime > 1) {
+      breakTime -= 1
+      displayCurrentTime(breakTime*60)
+    }
+  }
+  }
+}
+subOne.addEventListener('click', minusOne)
+
+function plusFive() {
+  if (isTimerRunning === false) {
+  if (curStatus === 'session') {
+    if (sessionTime < 90) {
+      sessionTime += 5
+      displayCurrentTime(sessionTime*60)
+    }
+  }
+  else if (curStatus === 'break') {
+    if (breakTime < 60) {
+      breakTime += 5
+      displayCurrentTime(breakTime*60)
+    }
+  }
+}
+}
+addFive.addEventListener('click', plusFive)
+
+function plusOne() {
+  if (isTimerRunning === false) {
+  if (curStatus === 'session') {
+    if (sessionTime < 90) {
+      sessionTime += 1
+      displayCurrentTime(sessionTime*60)
+    }
+  }
+  else if (curStatus === 'break') {
+    if (breakTime < 60) {
+      breakTime += 1
+      displayCurrentTime(breakTime*60)
+    }
+  }
+}
+}
+addOne.addEventListener('click', plusOne)
 
 // DISPLAY CURRENT TIME
 function displayCurrentTime(time) {
@@ -79,22 +135,29 @@ function displayCurrentTime(time) {
   curSecond = seconds
   if (curSecond == '0') {curSecond = '00'}
   curTime.innerHTML = curMinute + ':' + curSecond
+  tabTitle.innerText = curTime.textContent + ' - Session'
 }
 // START + PAUSE
 function startTimer() {
-  if (startStopBtn.textContent === 'START' && !isTimerRunning) {
+  if (curStatus == 'session') {count = 60*sessionTime}
+  else if (curStatus == 'break') {count = 60*breakTime}
+  if (startStopBtn.textContent === 'START') {
     startStopBtn.textContent = 'PAUSE';
+    subFive.style.display = "none";
+    subOne.style.display = "none";
+    addFive.style.display = "none";
+    addOne.style.display = "none";
+    isTimerRunning = true
     timer = setInterval(function() {
       count--;
       displayCurrentTime(count);
       if (count === 0) {
         clearInterval(timer);
         isTimerRunning = false;
-        console.log("Time's up!");
       }
     }, 1000);
     isTimerRunning = true;
-  } else if (startStopBtn.textContent === 'PAUSE' && isTimerRunning) {
+  } else if (startStopBtn.textContent === 'PAUSE') {
     startStopBtn.textContent = 'START';
     clearInterval(timer);
     isTimerRunning = false;
@@ -105,6 +168,10 @@ document.querySelector('#toggle').addEventListener('click', startTimer);
 // RESET
 function resetTimer() {
   clearInterval(timer);
+  subFive.style.display = "";
+  subOne.style.display = "";
+  addFive.style.display = "";
+  addOne.style.display = "";
   if (curStatus === 'session') {
     displayCurrentTime(sessionTime*60)
     count = sessionTime*60;
@@ -117,22 +184,3 @@ function resetTimer() {
   isTimerRunning = false
 }
 document.querySelector('#reset').addEventListener('click', resetTimer)
-// INCREMENTS
-// // if button clicked AND time not running, add/remove time depending on button type
-// function minusFive() {
-//   if (curStatus === 'session') {
-//     if (timeSession > 10) {
-//       console.log(timeSession)
-//       timeSession -= 5
-//       setTime(timeSession)
-//       console.log(timeSession)
-//     }
-//   }
-//   else if (curStatus === 'break') {
-//     if (timeBreak > 5) {
-//       timeBreak -= 5
-//       setTime(timeBreak)
-//     }
-//   }
-// }
-// document.querySelector('.minus-five').addEventListener('click', minusFive)
