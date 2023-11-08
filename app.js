@@ -1,26 +1,33 @@
-var pomodoroSkin,
-  displayStatus,
-  displayTime,
-  timer,
-  minutes,
-  seconds,
-  timeSession = 25,
-  timeBreak = 5,
-  timeOn = false,
-  time = 1500; // seconds
+// let pomodoroSkin,
+//   displayStatus,
+//   displayTime,
+//   timer,
+//   minutes,
+//   seconds,
+//   timeSession = 25, // work time in minutes
+//   timeBreak = 5,
+//   timeOn = false,
+//   time = 1500; // work time in seconds
 
 let curStatus = 'session';
 let switchBtn = document.querySelector('#switch')
 let tabTitle = document.querySelector('title')
+let timer;
+let isTimerRunning = false;
+let count;
+let sessionTime = 25
+let breakTime = 5
+let curTime = document.querySelector('.timer')
+let timeOn = false
 
-function changeDisplay() {
-  minutes = parseInt(time / 60, 10);
-  seconds = parseInt(time % 60, 10);
-  minutes = minutes < 10 ? "0" + minutes : minutes;
-  seconds = seconds < 10 ? "0" + seconds : seconds;
-  displayTime.textContent = minutes + ":" + seconds;
-  tabTitle.textContent = displayTime.textContent + " - Session";
-}
+// function changeDisplay() {
+//   minutes = parseInt(time / 60, 10);
+//   seconds = parseInt(time % 60, 10);
+//   minutes = minutes < 10 ? "0" + minutes : minutes;
+//   seconds = seconds < 10 ? "0" + seconds : seconds;
+//   displayTime.textContent = minutes + ":" + seconds;
+//   tabTitle.textContent = displayTime.textContent + " - Session";
+// }
 
 const toggleIcon = document.querySelector('.toggle-icon')
 document.querySelector('.theme-toggle').onclick = function() {
@@ -30,7 +37,6 @@ document.querySelector('.theme-toggle').onclick = function() {
 
 function darkMode() {
   const root = document.documentElement;
-  const switchBtn = document.querySelector('#switch')
   let newTheme;
   if (root.className === 'break' || root.className === 'light') {newTheme = 'dark'}
   else if (root.className === 'dark' && switchBtn.textContent == 'BREAK') {newTheme = 'light'}
@@ -41,104 +47,94 @@ function darkMode() {
 document.querySelector('.theme-toggle').addEventListener('click', darkMode)
 
 function setBreak() {
+  if (curStatus == 'session') {
+    curStatus = 'break'
+    displayCurrentTime(breakTime*60)
+    count = breakTime*60
+  }
+  else if (curStatus == 'break') {
+    curStatus = 'session'
+    displayCurrentTime(sessionTime*60)
+    count = sessionTime*60
+  }
+
   const root = document.documentElement;
   let newTheme;
   const switchBtn = document.querySelector('#switch')
   const status = document.querySelector('.status')
   if (root.className === 'break') {newTheme = 'light', switchBtn.textContent = 'BREAK', status.textContent = 'CURRENT: POMODORO'} else {newTheme = 'break', switchBtn.textContent = 'POMODORO', status.textContent = 'CURRENT: BREAK'}
   root.className = newTheme;
+
 }
 document.querySelector('#switch').addEventListener('click', setBreak)
 
-function setTime(newTime) {
-  time = newTime * 60;
-  changeDisplay();
-}
+// displayCurrentTime(sessionTime)
 
-function resetTimer() {
-  if (curStatus === 'session') {
-    setTime(timeSession);
-  } else {
-    setTime(timeBreak);
-  }
+// DISPLAY CURRENT TIME
+function displayCurrentTime(time) {
+  let minutes = (time/60) - (time/60 % 1);
+  let seconds = time % 60;
+  let curMinute = curTime.innerHTML.split(':')[0]
+  let curSecond = curTime.innerHTML.split(':')[1]
+  curMinute = minutes
+  curSecond = seconds
+  if (curSecond == '0') {curSecond = '00'}
+  curTime.innerHTML = curMinute + ':' + curSecond
 }
-
-function switchMode() {
-  if (curStatus !== 'break') {
-    curStatus = 'break';
-    setTime(timeBreak);
-    pomodoroSkin.classList.remove("session");
-    pomodoroSkin.classList.add("break");
-    switchBtn.textContent = 'WORK'
-  } else {
-    curStatus = 'session';
-    setTime(timeSession);
-    pomodoroSkin.classList.remove("break");
-    pomodoroSkin.classList.add("session");
-    switchBtn.textContent = 'BREAK'
-  }
-  displayStatus.innerHTML = curStatus;
-}
-
-function startTimer(display) {
-  clearInterval(timer);
-  timer = setInterval(function() {
-    changeDisplay();
-    if (time !== 0) {
-      time--;
-    } else {
-      switchMode();
-    }
-  }, 1000);
-}
-
-function toggleTimer() {
-  if (timeOn) {
-    timeOn = false;
-    displayToggle.innerHTML = 'PLAY';
+// START + PAUSE
+function startTimer() {
+  let startStopBtn = document.querySelector("#toggle");
+  if (startStopBtn.textContent === 'START' && !isTimerRunning) {
+    startStopBtn.textContent = 'PAUSE';
+    timer = setInterval(function() {
+      count--;
+      displayCurrentTime(count);
+      if (count === 0) {
+        clearInterval(timer);
+        isTimerRunning = false;
+        console.log("Time's up!");
+      }
+    }, 1000);
+    isTimerRunning = true; // Set the timer status to running.
+  } else if (startStopBtn.textContent === 'PAUSE' && isTimerRunning) {
+    startStopBtn.textContent = 'START';
     clearInterval(timer);
-  } else {
-    timeOn = true;
-    displayToggle.innerHTML = 'PAUSE';
-    startTimer();
+    isTimerRunning = false; // Set the timer status to paused.
   }
 }
+document.querySelector('#toggle').addEventListener('click', startTimer);
 
-(function() {
-  pomodoroSkin = document.getElementsByClassName('pomodoro')[0];
-  displayStatus = document.getElementsByClassName('status')[0];
-  displayTime = document.getElementsByClassName('timer')[0];
-  displayToggle = document.getElementById('toggle');
+// You can now check if the timer is running or paused from elsewhere in your code.
+// Example:
+if (isTimerRunning) {
+  console.log("The timer is currently running.");
+} else {
+  console.log("The timer is paused or not started.");
+}
 
-  document.getElementById('switch').onclick = switchMode;
-  document.getElementById('reset').onclick = resetTimer;
-  document.getElementById('toggle').onclick = toggleTimer;
 
-  var displaySession = document.getElementById('session');
-  var displayBreak = document.getElementById('break');
+// RESET
+function resetTimer() {
 
-  document.getElementById('session-minus').onclick = function() {
-    if (timeSession > 1) {
-      timeSession--;
-      displaySession.innerHTML = timeSession;
-    }
-  };
-  document.getElementById('session-plus').onclick = function() {
-    if (timeSession < 60) {
-      timeSession++;
-      displaySession.innerHTML = timeSession;
-    }
-  };
-  document.getElementById('break-minus').onclick = function() {
-    if (timeBreak > 1) {
-      timeBreak--;
-      displayBreak.innerHTML = timeBreak;
-    }
-  };
-  document.getElementById('break-plus').onclick = function() {
-    if (timeBreak < 60) {
-      timeBreak++;
-      displayBreak.innerHTML = timeBreak;
-    }
-  };
-})();
+}
+document.querySelector('#reset').addEventListener('click', resetTimer)
+// CHANGE MODE
+// INCREMENTS
+// // if button clicked AND time not running, add/remove time depending on button type
+// function minusFive() {
+//   if (curStatus === 'session') {
+//     if (timeSession > 10) {
+//       console.log(timeSession)
+//       timeSession -= 5
+//       setTime(timeSession)
+//       console.log(timeSession)
+//     }
+//   }
+//   else if (curStatus === 'break') {
+//     if (timeBreak > 5) {
+//       timeBreak -= 5
+//       setTime(timeBreak)
+//     }
+//   }
+// }
+// document.querySelector('.minus-five').addEventListener('click', minusFive)
