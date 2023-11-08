@@ -10,15 +10,16 @@
 //   time = 1500; // work time in seconds
 
 let curStatus = 'session';
-let switchBtn = document.querySelector('#switch')
-let tabTitle = document.querySelector('title')
+let switchBtn = document.querySelector('#switch');
+let tabTitle = document.querySelector('title');
 let timer;
 let isTimerRunning = false;
-let count;
-let sessionTime = 25
-let breakTime = 5
-let curTime = document.querySelector('.timer')
-let timeOn = false
+let sessionTime = 25;
+let breakTime = 5;
+let count = sessionTime*60;
+let curTime = document.querySelector('.timer');
+let timeOn = false;
+let startStopBtn = document.querySelector("#toggle");
 
 // function changeDisplay() {
 //   minutes = parseInt(time / 60, 10);
@@ -68,8 +69,6 @@ function setBreak() {
 }
 document.querySelector('#switch').addEventListener('click', setBreak)
 
-// displayCurrentTime(sessionTime)
-
 // DISPLAY CURRENT TIME
 function displayCurrentTime(time) {
   let minutes = (time/60) - (time/60 % 1);
@@ -83,7 +82,6 @@ function displayCurrentTime(time) {
 }
 // START + PAUSE
 function startTimer() {
-  let startStopBtn = document.querySelector("#toggle");
   if (startStopBtn.textContent === 'START' && !isTimerRunning) {
     startStopBtn.textContent = 'PAUSE';
     timer = setInterval(function() {
@@ -95,30 +93,30 @@ function startTimer() {
         console.log("Time's up!");
       }
     }, 1000);
-    isTimerRunning = true; // Set the timer status to running.
+    isTimerRunning = true;
   } else if (startStopBtn.textContent === 'PAUSE' && isTimerRunning) {
     startStopBtn.textContent = 'START';
     clearInterval(timer);
-    isTimerRunning = false; // Set the timer status to paused.
+    isTimerRunning = false;
   }
 }
 document.querySelector('#toggle').addEventListener('click', startTimer);
 
-// You can now check if the timer is running or paused from elsewhere in your code.
-// Example:
-if (isTimerRunning) {
-  console.log("The timer is currently running.");
-} else {
-  console.log("The timer is paused or not started.");
-}
-
-
 // RESET
 function resetTimer() {
-
+  clearInterval(timer);
+  if (curStatus === 'session') {
+    displayCurrentTime(sessionTime*60)
+    count = sessionTime*60;
+  }
+  else if (curStatus === 'break') {
+    displayCurrentTime(breakTime*60)
+    count = breakTime*60
+  }
+  startStopBtn.textContent = 'START'
+  isTimerRunning = false
 }
 document.querySelector('#reset').addEventListener('click', resetTimer)
-// CHANGE MODE
 // INCREMENTS
 // // if button clicked AND time not running, add/remove time depending on button type
 // function minusFive() {
